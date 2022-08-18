@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ExpenseForm } from "../Expenses/ExpenseForm/ExpenseForm";
 import "./NewExpense.css";
 
 export const NewExpense = ({ handleAddExpense }) => {
+  const [openExpenseForm, setOpenExpenseForm] = useState(false);
+
   const handleSaveData = (enteredData) => {
     const expenseData = {
       ...enteredData,
@@ -11,9 +13,17 @@ export const NewExpense = ({ handleAddExpense }) => {
     handleAddExpense(expenseData);
   };
 
+  const handleClickForm = () => {
+    setOpenExpenseForm(!openExpenseForm);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm handleSaveData={handleSaveData} />
+      <ExpenseForm
+        handleClickForm={handleClickForm}
+        open={openExpenseForm}
+        handleSaveData={handleSaveData}
+      />
     </div>
   );
 };
