@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-export const ExpenseForm = ({ handleSaveData, handleClickForm, open }) => {
+export const ExpenseForm = ({ handleSaveData, onCancel }) => {
   const [input, setInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -34,52 +34,44 @@ export const ExpenseForm = ({ handleSaveData, handleClickForm, open }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {open ? (
-        <>
-          <div className="new-expense__controls">
-            <div className="new-expense__control">
-              <label>Title</label>
-              <input
-                value={input.enteredTitle}
-                onChange={handleChangeTitle}
-                type="text"
-                placeholder="title"
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Amount</label>
-              <input
-                value={input.enteredAmount}
-                onChange={handleChangeAmount}
-                type="number"
-                min="0.01"
-                step="0.01"
-                placeholder="amount"
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Date</label>
-              <input
-                value={input.enteredDate}
-                onChange={handleChangeDate}
-                type="date"
-                min="2019-01-01"
-                max="2022-12-31"
-              />
-            </div>
-          </div>
-          <div className="new-expense__actions">
-            <button onClick={handleClickForm} type="button">
-              Cancel
-            </button>
-            <button type="submit">Add Expense</button>
-          </div>
-        </>
-      ) : (
-        <button onClick={handleClickForm} type="button">
-          AddNewExpense
+      <div className="new-expense__controls">
+        <div className="new-expense__control">
+          <label>Title</label>
+          <input
+            value={input.enteredTitle}
+            onChange={handleChangeTitle}
+            type="text"
+            placeholder="title"
+          />
+        </div>
+        <div className="new-expense__control">
+          <label>Amount</label>
+          <input
+            value={input.enteredAmount}
+            onChange={handleChangeAmount}
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="amount"
+          />
+        </div>
+        <div className="new-expense__control">
+          <label>Date</label>
+          <input
+            value={input.enteredDate}
+            onChange={handleChangeDate}
+            type="date"
+            min="2019-01-01"
+            max="2022-12-31"
+          />
+        </div>
+      </div>
+      <div className="new-expense__actions">
+        <button onClick={onCancel} type="button">
+          Cancel
         </button>
-      )}
+        <button type="submit">Add Expense</button>
+      </div>
     </form>
   );
 };

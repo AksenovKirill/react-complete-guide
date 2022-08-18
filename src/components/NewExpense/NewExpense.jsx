@@ -3,7 +3,7 @@ import { ExpenseForm } from "../Expenses/ExpenseForm/ExpenseForm";
 import "./NewExpense.css";
 
 export const NewExpense = ({ handleAddExpense }) => {
-  const [openExpenseForm, setOpenExpenseForm] = useState(false);
+  const [isOpenForm, setOpenForm] = useState(false);
 
   const handleSaveData = (enteredData) => {
     const expenseData = {
@@ -13,17 +13,24 @@ export const NewExpense = ({ handleAddExpense }) => {
     handleAddExpense(expenseData);
   };
 
-  const handleClickForm = () => {
-    setOpenExpenseForm(!openExpenseForm);
+  const handleClickStartEding = () => {
+    setOpenForm(true);
+  };
+
+  const handleClickStopEding = () => {
+    setOpenForm(false);
   };
 
   return (
     <div className="new-expense">
-      <ExpenseForm
-        handleClickForm={handleClickForm}
-        open={openExpenseForm}
-        handleSaveData={handleSaveData}
-      />
+      {!isOpenForm && (
+        <button onClick={handleClickStartEding} type="button">
+          AddNewExpense
+        </button>
+      )}
+      {isOpenForm && (
+        <ExpenseForm onCancel={handleClickStopEding} handleSaveData={handleSaveData} />
+      )}
     </div>
   );
 };
