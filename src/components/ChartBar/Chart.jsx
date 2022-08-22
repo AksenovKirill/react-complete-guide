@@ -9,7 +9,12 @@ export const Chart = ({ dataPoints }) => {
   return (
     <div className="chart">
       {dataPoints.map((dataPoint, index) => (
-        <ChartBar key={index} value={dataPoint.value} maxValue={total} label={dataPoint.label} />
+        <ChartBar
+          key={dataPoint.label}
+          value={dataPoint.value}
+          maxValue={total}
+          label={dataPoint.label}
+        />
       ))}
     </div>
   );

@@ -9,22 +9,31 @@ export const ExpenseForm = ({ handleSaveData, onCancel }) => {
   });
 
   const handleChangeTitle = (event) => {
-    setInput((prevState) => ({ ...prevState, enteredTitle: event.target.value }));
+    setInput((prevState) => ({
+      ...prevState,
+      enteredTitle: event.target.value,
+    }));
   };
 
   const handleChangeAmount = (event) => {
-    setInput((prevState) => ({ ...prevState, enteredAmount: event.target.value }));
+    setInput((prevState) => ({
+      ...prevState,
+      enteredAmount: event.target.value,
+    }));
   };
 
   const handleChangeDate = (event) => {
-    setInput((prevState) => ({ ...prevState, enteredDate: event.target.value }));
+    setInput((prevState) => ({
+      ...prevState,
+      enteredDate: event.target.value,
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const expenseData = {
       title: input.enteredTitle,
-      amount: input.enteredAmount,
+      amount: +input.enteredAmount,
       date: new Date(input.enteredDate),
     };
 
