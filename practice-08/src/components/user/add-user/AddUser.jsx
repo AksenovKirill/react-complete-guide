@@ -1,45 +1,33 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "../../UI/button/Button";
 import { Card } from "../../UI/card/Card";
 import { ErrorModal } from "../../UI/error-modal/ErrorModal";
 import styles from "./AddUser.module.css";
 
 export const AddUser = ({ addNewUser }) => {
-  const [input, setInput] = useState({
-    name: "",
-    age: "",
-  });
+  const nameRef = useRef();
+  const ageRef = useRef();
+  console.log('111')
   const [error, setError] = useState("");
-
-  const handleChangeName = (event) => {
-    setInput((prevState) => ({
-      ...prevState,
-      name: event.target.value,
-    }));
-  };
-
-  const handleChangeAge = (event) => {
-    setInput((prevState) => ({
-      ...prevState,
-      age: event.target.value,
-    }));
-  };
-
+  
   const handleAddNewUser = (event) => {
     event.preventDefault();
-    if (input.name.trim().length === 0 || input.age.trim().length === 0) {
+    const nameValue = nameRef.current.value;
+    const ageValue = ageRef.current.value;
+    if (nameValue.trim().length === 0 || ageValue.trim().length === 0) {
       setError({
         title: "Invalid input",
         message: "Please enter a valid name and age (non-empty values)",
       });
       return null;
     }
-    if (Number(input.age) < 1) {
+    if (Number(ageValue) < 1) {
       setError({ title: "Invalid age", message: "Please enter a valid age (> 0)" });
       return null;
     }
-    addNewUser(input.name, Number(input.age));
-    setInput({ name: "", age: "" });
+    addNewUser(nameValue, Number(ageValue));
+    nameRef.current.value = '';
+    ageRef.current.value = '';
     setError("");
   };
 
@@ -56,17 +44,15 @@ export const AddUser = ({ addNewUser }) => {
         <form onSubmit={handleAddNewUser}>
           <label htmlFor="username">Username</label>
           <input
+            ref={nameRef}
             className={styles.input}
-            onChange={handleChangeName}
-            value={input.name}
             type="text"
             id="username"
           />
           <label htmlFor="age">Age (Years)</label>
           <input
+            ref={ageRef}
             className={styles.input}
-            onChange={handleChangeAge}
-            value={input.age}
             id="age"
             type="number"
           />
