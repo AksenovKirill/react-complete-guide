@@ -52,7 +52,7 @@ export const AddUser = ({ addNewUser }) => {
   };
 
   return (
-    <Wrapper>
+    <>
       {error && (
         <ErrorModal
           handleClick={handleError}
@@ -81,6 +81,6 @@ export const AddUser = ({ addNewUser }) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </Wrapper>
+    </>
   );
 };
