@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Wrapper } from "../../helpers/Wrapper";
 import { Button } from "../../UI/button/Button";
 import { Card } from "../../UI/card/Card";
 import { ErrorModal } from "../../UI/error-modal/ErrorModal";
@@ -35,7 +36,10 @@ export const AddUser = ({ addNewUser }) => {
       return null;
     }
     if (Number(input.age) < 1) {
-      setError({ title: "Invalid age", message: "Please enter a valid age (> 0)" });
+      setError({
+        title: "Invalid age",
+        message: "Please enter a valid age (> 0)",
+      });
       return null;
     }
     addNewUser(input.name, Number(input.age));
@@ -48,9 +52,13 @@ export const AddUser = ({ addNewUser }) => {
   };
 
   return (
-    <>
+    <Wrapper>
       {error && (
-        <ErrorModal handleClick={handleError} title={error.title} message={error.message} />
+        <ErrorModal
+          handleClick={handleError}
+          title={error.title}
+          message={error.message}
+        />
       )}
       <Card cssClass={styles.input}>
         <form onSubmit={handleAddNewUser}>
@@ -73,6 +81,6 @@ export const AddUser = ({ addNewUser }) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </>
+    </Wrapper>
   );
 };
