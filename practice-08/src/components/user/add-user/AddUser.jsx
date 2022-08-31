@@ -7,7 +7,6 @@ import styles from "./AddUser.module.css";
 export const AddUser = ({ addNewUser }) => {
   const nameRef = useRef();
   const ageRef = useRef();
-  console.log('111')
   const [error, setError] = useState("");
   
   const handleAddNewUser = (event) => {
