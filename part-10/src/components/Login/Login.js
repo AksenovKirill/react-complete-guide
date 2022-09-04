@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from "react";
-
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
@@ -34,21 +33,11 @@ const Login = (props) => {
   });
 
   useEffect(() => {
-    console.log("EFFECT RUNNING");
-
-    return () => {
-      console.log("EFFECT CLEANUP");
-    };
-  }, []);
-
-  useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("Checking form validity!");
       setFormIsValid(emailState.isValid && passwordState.isValid);
     }, 500);
 
     return () => {
-      console.log("CLEANUP");
       clearTimeout(identifier);
     };
   }, [emailState, passwordState]);
