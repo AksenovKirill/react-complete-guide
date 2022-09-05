@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {CartContextProvider} from './context/CartContext';
+import {CartProvider} from './context/CartProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <CartContextProvider>
+  <CartProvider>
     <App />
-  </CartContextProvider>,
+  </CartProvider>,
 );
