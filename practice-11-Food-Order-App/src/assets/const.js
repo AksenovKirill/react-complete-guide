@@ -25,11 +25,7 @@ export const DUMMY_MEALS = [
   },
 ];
 
-export const inputAmountProps = {
-  id: 'amount',
-  type: 'number',
-  min: '1',
-  max: '5',
-  step: '1',
-  defaultValue: '1',
-};
+export const cartItems = [
+  {id: 'c1', name: 'Suchi', amount: 2, price: 12.99},
+  {id: 'd1', name: 'Pizza', amount: 1, price: 7.99},
+];
