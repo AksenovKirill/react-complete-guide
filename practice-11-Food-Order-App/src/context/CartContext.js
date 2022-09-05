@@ -1,30 +1,11 @@
-import {createContext, useState} from 'react';
+import {createContext} from 'react';
 
 export const CartContext = createContext({
+  items: [],
+  totalAmount: 0,
+  addItem: (item) => {},
+  removeItem: (id) => {},
   isOpen: false,
   handleOpenCart: () => {},
   handleCloseCart: () => {},
 });
-
-export const CartContextProvider = ({children}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpenCart = () => {
-    setIsOpen(true);
-  };
-
-  const handleCloseCart = () => {
-    setIsOpen(false);
-  };
-
-  return (
-    <CartContext.Provider
-      value={{
-        isOpen: isOpen,
-        handleOpenCart: handleOpenCart,
-        handleCloseCart: handleCloseCart,
-      }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
