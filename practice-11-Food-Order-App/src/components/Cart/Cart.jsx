@@ -1,11 +1,12 @@
 import React from 'react';
 import {cartItems} from '../../assets/const';
+import {Modal} from '../UI/Modal/Modal';
 import classes from './Cart.module.css';
 
 export const Cart = (props) => {
   const cartList = cartItems.map((item) => <li key={item.id}>{item.name}</li>);
   return (
-    <div>
+    <Modal>
       <ul className={classes['cat-items']}>{cartList}</ul>
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -15,6 +16,6 @@ export const Cart = (props) => {
         <button className={classes['button--alt']}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
-    </div>
+    </Modal>
   );
 };
