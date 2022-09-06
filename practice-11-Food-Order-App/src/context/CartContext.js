@@ -6,6 +6,5 @@ export const CartContext = createContext({
   addItem: (item) => {},
   removeItem: (id) => {},
   isOpen: false,
-  handleOpenCart: () => {},
-  handleCloseCart: () => {},
+  handleToggleCart: () => {},
 });

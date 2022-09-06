@@ -13,13 +13,11 @@ export const MealItemForm = ({id}) => {
     min: '1',
     max: '5',
     step: '1',
-    defaultValue: `${amount}`,
+    defaultValue: 1,
   };
 
   const handleChange = (event) => {
-    setAmount((prevState) => {
-      return (prevState += event.target.value);
-    });
+    setAmount(event.target.value);
   };
 
   return (
