@@ -5,7 +5,7 @@ import {CartContext} from '../../context/CartContext';
 import classes from './Cart.module.css';
 
 export const Cart = () => {
-  const {isOpen, handleCloseCart} = useContext(CartContext);
+  const {isOpen, handleToggleCart} = useContext(CartContext);
   const cartList = cartItems.map((item) => <li key={item.id}>{item.name}</li>);
   return (
     <>
@@ -18,7 +18,7 @@ export const Cart = () => {
           </div>
           <div className={classes.actions}>
             <button
-              onClick={handleCloseCart}
+              onClick={handleToggleCart}
               className={classes['button--alt']}>
               Close
             </button>
