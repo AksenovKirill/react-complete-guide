@@ -4,9 +4,9 @@ import {CartIcon} from '../../Cart/CartIcon';
 import classes from './HeaderCartButton.module.css';
 
 export const HeaderCartButton = () => {
-  const {items, handleToggleCart, totalAmount} = useContext(CartContext);
+  const {items, handleToggleCart} = useContext(CartContext);
   const numberOfCartItems = items?.reduce(
-    (sum, meal) => (sum += meal.amount),
+    (sum, meal) => (sum += Number(meal.amount)),
     0,
   );
   return (
@@ -15,7 +15,7 @@ export const HeaderCartButton = () => {
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>{0}</span>
+      <span className={classes.badge}>{numberOfCartItems ?? 0}</span>
     </button>
   );
 };
