@@ -5,7 +5,7 @@ import {CartContext} from '../../context/CartContext';
 import classes from './Cart.module.css';
 
 export const Cart = () => {
-  const {isOpen, handleToggleCart} = useContext(CartContext);
+  const {isOpen, handleToggleCart, totalAmount} = useContext(CartContext);
   const cartList = cartItems.map((item) => <li key={item.id}>{item.name}</li>);
   return (
     <>
@@ -14,7 +14,7 @@ export const Cart = () => {
           <ul className={classes['cat-items']}>{cartList}</ul>
           <div className={classes.total}>
             <span>Total Amount</span>
-            <span>35.62</span>
+            <span>{totalAmount}</span>
           </div>
           <div className={classes.actions}>
             <button
