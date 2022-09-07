@@ -6,6 +6,7 @@ import classes from './Cart.module.css';
 
 export const Cart = () => {
   const {isOpen, handleToggleCart, totalAmount} = useContext(CartContext);
+  console.log(totalAmount);
   const cartList = cartItems.map((item) => <li key={item.id}>{item.name}</li>);
   return (
     <>

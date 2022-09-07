@@ -40,6 +40,7 @@ export const CartProvider = ({children}) => {
 
   const handleAddItem = (item) => {
     dispatchCartAction({type: 'ADD_ITEM', payload: item});
+    console.log('item', item);
   };
 
   const handleRemoveItem = (id) => {
