@@ -5,10 +5,9 @@ import classes from './HeaderCartButton.module.css';
 
 export const HeaderCartButton = () => {
   const {items, handleToggleCart} = useContext(CartContext);
-  const numberOfCartItems = items?.reduce(
-    (sum, meal) => (sum += Number(meal.amount)),
-    0,
-  );
+  const numberOfCartItems = items?.reduce((sum, item) => {
+    return sum + item.amount;
+  }, 0);
   return (
     <button onClick={handleToggleCart} className={classes.button}>
       <span className={classes.icon}>

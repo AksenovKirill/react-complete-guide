@@ -8,8 +8,8 @@ export const MealItem = (props) => {
   const {handleAddItem} = useContext(CartContext);
   const fixPrice = `${price.toFixed(2)}`;
 
-  const addToCartItem = (amount) => {
-    handleAddItem({amount, price: fixPrice});
+  const handleAddToCart = (amount) => {
+    handleAddItem({amount: amount, price: fixPrice});
   };
 
   return (
@@ -20,7 +20,7 @@ export const MealItem = (props) => {
         <div className={classes.price}> {fixPrice}</div>
       </div>
       <div>
-        <MealItemForm onAddtoCart={addToCartItem} id={id} />
+        <MealItemForm handleAddToCart={handleAddToCart} id={id} />
       </div>
     </li>
   );
