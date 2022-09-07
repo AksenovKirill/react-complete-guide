@@ -9,7 +9,7 @@ export const MealItem = (props) => {
   const fixPrice = `${price.toFixed(2)}`;
 
   const handleAddToCart = (amount) => {
-    handleAddItem({amount: amount, price: fixPrice});
+    handleAddItem({id: id, name: name, amount: amount, price: price});
   };
 
   return (
