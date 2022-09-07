@@ -3,22 +3,24 @@ import {CartContext} from '../../../context/CartContext';
 import {Input} from '../../UI/Input/Input';
 import classes from './MealItemForm.module.css';
 
-export const MealItemForm = ({onAddtoCart, id}) => {
+export const MealItemForm = ({handleAddToCart, id}) => {
   const [isAmountValid, setIsAmountValid] = useState(true);
   const inputRef = useRef();
 
   const handleSubmitData = (event) => {
     event.preventDefault();
-    const enteredAmountNumber = Number(inputRef.current.value);
+    const enteredAmount = inputRef.current.value;
+    const enteredAmountNumber = Number(enteredAmount);
+
     if (
-      inputRef.current.value.trim().length === 0 ||
+      enteredAmount.trim().length === 0 ||
       enteredAmountNumber < 1 ||
       enteredAmountNumber > 5
     ) {
       setIsAmountValid(false);
       return null;
     }
-    onAddtoCart(enteredAmountNumber);
+    handleAddToCart(enteredAmountNumber);
   };
   const inputAmountProps = {
     id: 'amount' + id,
@@ -26,7 +28,7 @@ export const MealItemForm = ({onAddtoCart, id}) => {
     min: '1',
     max: '5',
     step: '1',
-    defaultValue: 1,
+    defaultValue: '1',
   };
 
   return (
