@@ -6,9 +6,12 @@ import {MealItemForm} from './MealItemForm';
 export const MealItem = (props) => {
   const {name, description, price, id} = props;
   const {handleAddItem} = useContext(CartContext);
+  const ctx = useContext(CartContext);
+  console.log(ctx);
   const fixPrice = `${price.toFixed(2)}`;
 
   const handleAddToCart = (amount) => {
+    console.log(111);
     handleAddItem({id: id, name: name, amount: amount, price: price});
   };
 

@@ -20,12 +20,6 @@ const cartReducer = (state, action) => {
   if (action.type === 'REMOVE_ITEM') {
     state.items = state.items.filter((item) => item !== action.payload);
   }
-  if (action.type === 'SHOW_CART') {
-    state.isOpen = action.payload;
-    return {
-      isOpen: state.isOpen,
-    };
-  }
   return defaultCartState;
 };
 export const CartProvider = ({children}) => {
@@ -34,13 +28,8 @@ export const CartProvider = ({children}) => {
     defaultCartState,
   );
 
-  const handleToggleCart = () => {
-    dispatchCartAction({type: 'SHOW_CART', payload: !cartState.isOpen});
-  };
-
   const handleAddItem = (item) => {
     dispatchCartAction({type: 'ADD_ITEM', payload: item});
-    console.log('item', item);
   };
 
   const handleRemoveItem = (id) => {
@@ -53,7 +42,6 @@ export const CartProvider = ({children}) => {
     isOpen: cartState.isOpen,
     handleAddItem: handleAddItem,
     handleRemoveItem: handleRemoveItem,
-    handleToggleCart: handleToggleCart,
   };
 
   return (
