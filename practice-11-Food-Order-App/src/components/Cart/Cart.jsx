@@ -1,12 +1,25 @@
 import React, {useContext} from 'react';
 import {Modal} from '../UI/Modal/Modal';
+import {CartItem} from './CartItem';
 import {CartContext} from '../../context/CartContext';
 import classes from './Cart.module.css';
 
 export const Cart = ({isShowCart, onClose}) => {
   const {totalAmount, items} = useContext(CartContext);
   const fixTotal = `$${totalAmount.toFixed(2)}`;
-  const cartList = items?.map((item) => <li key={item.id}>{item.name}</li>);
+  const handleRemoveItem = (id) => {};
+  const handleAddItem = (item) => {};
+
+  const cartList = items?.map((item) => (
+    <CartItem
+      key={item.id}
+      name={item.name}
+      price={item.price}
+      amount={item.amount}
+      onRemove={handleRemoveItem.bind(null, item.id)}
+      onAdd={handleAddItem.bind(null, item)}
+    />
+  ));
   const isItems = items?.length > 0;
   return (
     <>
