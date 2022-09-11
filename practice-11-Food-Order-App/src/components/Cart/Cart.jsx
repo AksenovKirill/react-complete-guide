@@ -5,10 +5,19 @@ import {CartContext} from '../../context/CartContext';
 import classes from './Cart.module.css';
 
 export const Cart = ({isShowCart, onClose}) => {
-  const {totalAmount, items} = useContext(CartContext);
+  const {totalAmount, items, handleAddItem, handleRemoveItem} =
+    useContext(CartContext);
+
   const fixTotal = `$${totalAmount.toFixed(2)}`;
-  const handleRemoveItem = (id) => {};
-  const handleAddItem = (item) => {};
+  const isItems = items?.length > 0;
+
+  const onRemoveItem = (id) => {
+    handleRemoveItem(id);
+  };
+
+  const onAddItem = (item) => {
+    handleAddItem({...item, amount: 1});
+  };
 
   const cartList = items?.map((item) => (
     <CartItem
@@ -16,11 +25,11 @@ export const Cart = ({isShowCart, onClose}) => {
       name={item.name}
       price={item.price}
       amount={item.amount}
-      onRemove={handleRemoveItem.bind(null, item.id)}
-      onAdd={handleAddItem.bind(null, item)}
+      onRemove={onRemoveItem.bind(null, item.id)}
+      onAdd={onAddItem.bind(null, item)}
     />
   ));
-  const isItems = items?.length > 0;
+
   return (
     <>
       {isShowCart && (

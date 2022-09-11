@@ -1,5 +1,4 @@
-import React, {useContext, useRef, useState} from 'react';
-import {CartContext} from '../../../context/CartContext';
+import React, {useRef, useState} from 'react';
 import {Input} from '../../UI/Input/Input';
 import classes from './MealItemForm.module.css';
 
@@ -22,6 +21,7 @@ export const MealItemForm = ({handleAddToCart, id}) => {
     }
     handleAddToCart(enteredAmountNumber);
   };
+
   const inputAmountProps = {
     id: 'amount' + id,
     type: 'number',
