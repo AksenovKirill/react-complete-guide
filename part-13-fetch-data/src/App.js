@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
-
-import MoviesList from './components/MoviesList';
-import AddMovie from './components/AddMovie';
-import './App.css';
+import React, { useState, useEffect, useCallback } from "react";
+import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -13,11 +12,10 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://swapi.dev/api/films/');
+      const response = await fetch("https://swapi.dev/api/films/");
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
-
       const data = await response.json();
 
       const transformedMovies = data.results.map((movieData) => {
@@ -28,6 +26,7 @@ function App() {
           releaseDate: movieData.release_date,
         };
       });
+
       setMovies(transformedMovies);
     } catch (error) {
       setError(error.message);
@@ -56,6 +55,10 @@ function App() {
   if (isLoading) {
     content = <p>Loading...</p>;
   }
+
+  useEffect(() => {
+    handleFetchMovies();
+  }, []);
 
   return (
     <React.Fragment>
