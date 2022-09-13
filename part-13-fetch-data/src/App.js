@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
 
@@ -11,11 +11,11 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch("https://swapi.dev/api/films/");
-      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error("Smthg went wrong");
+        throw new Error("Some thing went wrong");
       }
+      const data = await response.json();
 
       const adaptMovies = data.results.map((movieData) => {
         return {
@@ -26,12 +26,15 @@ function App() {
         };
       });
       setMovies(adaptMovies);
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false); 
       setError(error.message);
     }
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    handleFetchMovies();
+  }, []);
 
   return (
     <>
@@ -40,7 +43,7 @@ function App() {
       </section>
       <section>
         {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
-        {!isLoading && movies.length === 0 && <p>Found no movies.</p>}
+        {!isLoading && movies.length === 0 && !error && <p>Found no movies.</p>}
         {isLoading && <p>Loading...</p>}
         {!isLoading && error && <p>{error}</p>}
       </section>
