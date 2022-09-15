@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { requestConfig } from "../const";
-export const useHttp = (requestConfig) => {
+
+export const useHttp = (requestConfig, applyData) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -9,9 +9,9 @@ export const useHttp = (requestConfig) => {
     setError(null);
     try {
       const response = await fetch(requestConfig.url, {
-        method: requestConfig.method,
-        headers: requestConfig.headers,
-        body: JSON.stringify(requestConfig.body),
+        method: requestConfig.method ? requestConfig.method : "GET",
+        headers: requestConfig.headers ? requestConfig.headers : {},
+        body: JSON.stringify(requestConfig.body) ? JSON.stringify(requestConfig.body) : null,
       });
 
       if (!response.ok) {
@@ -19,17 +19,15 @@ export const useHttp = (requestConfig) => {
       }
 
       const data = await response.json();
-
-      const loadedTasks = [];
-
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
-
-      setTasks(loadedTasks);
+      applyData(data);
     } catch (err) {
       setError(err.message || "Something went wrong!");
     }
     setIsLoading(false);
+  };
+  return {
+    isLoading,
+    sendRequest,
+    error,
   };
 };
