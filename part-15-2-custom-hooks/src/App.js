@@ -1,45 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useHttp } from "./hooks/useHttp";
+import React, {useEffect, useState, useCallback} from "react";
+import {useHttp} from "./hooks/useHttp";
 import Tasks from "./components/Tasks/Tasks";
 import NewTask from "./components/NewTask/NewTask";
+import {BASE_URL} from "./const";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
-  const adapterDataToTasks = (taskObj) => {
-    const loadedTasks = [];
+    const {
+        isLoading, error, sendRequest: fetchTasks,
+    } = useHttp();
 
-    for (const taskKey in taskObj) {
-      loadedTasks.push({ id: taskKey, text: taskObj[taskKey].text });
-    }
-    setTasks(loadedTasks);
-  };
+    useEffect(() => {
+        const adapterDataToTasks = (taskObj) => {
+            const loadedTasks = [];
 
-  const {
-    isLoading,
-    error,
-    sendRequest: fetchTasks,
-  } = useHttp(
-    {
-      url: "https://react-http-6b4a6.firebaseio.com/tasks.json",
-    },
-    adapterDataToTasks
-  );
+            for (const taskKey in taskObj) {
+                loadedTasks.push({id: taskKey, text: taskObj[taskKey].text});
+            }
+            setTasks(loadedTasks);
+        };
 
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
+        fetchTasks({
+            url: BASE_URL,
+        }, adapterDataToTasks);
+    }, [fetchTasks]);
 
-  const taskAddHandler = (task) => {
-    setTasks((prevTasks) => prevTasks.concat(task));
-  };
+    const taskAddHandler = (task) => {
+        setTasks((prevTasks) => prevTasks.concat(task));
+    };
 
-  return (
-    <React.Fragment>
-      <NewTask onAddTask={taskAddHandler} />
-      <Tasks items={tasks} loading={isLoading} error={error} onFetch={fetchTasks} />
-    </React.Fragment>
-  );
+    return (<React.Fragment>
+        <NewTask onAddTask={taskAddHandler}/>
+        <Tasks items={tasks} loading={isLoading} error={error} onFetch={fetchTasks}/>
+    </React.Fragment>);
 }
 
 export default App;
