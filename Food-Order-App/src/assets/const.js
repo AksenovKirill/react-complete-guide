@@ -1,3 +1,5 @@
+export const BASE_URL =
+  'https://http-ff099-default-rtdb.firebaseio.com/meals.json';
 export const DUMMY_MEALS = [
   {
     id: 'm1',
